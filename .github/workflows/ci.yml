@@ -26,8 +26,10 @@ jobs:
                 python-version: 3.8
 
         -   name: Install python dependencies
-            run:
+            run: |
                 pip install -e .[pre-commit,tests]
+                pip uninstall -y aiida-quantumespresso
+                pip install git+https://github.com/aiidateam/aiida-quantumespresso.git@feature/input-protocols
 
         -   name: Run pre-commit
             run:
@@ -63,6 +65,8 @@ jobs:
             run: |
                 pip install --upgrade setuptools
                 pip install -e .[tests]
+                pip uninstall -y aiida-quantumespresso
+                pip install git+https://github.com/aiidateam/aiida-quantumespresso.git@feature/input-protocols
                 reentry scan
 
         -   name: Run pytest
