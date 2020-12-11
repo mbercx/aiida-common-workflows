@@ -99,14 +99,16 @@ class QuantumEspressoRelaxInputsGenerator(RelaxInputsGenerator):
             calc_engines['relax']['code'],
             structure,
             protocol=protocol,
-            overrides={'base': {
-                'pw': {
-                    'metadata': {
-                        'options': calc_engines['relax']['options']
+            overrides={
+                'base': {
+                    'pw': {
+                        'metadata': {
+                            'options': calc_engines['relax']['options']
+                        }
                     }
-                }
-            }},
-            relax_type=types.RelaxType(relax_type.value),
+                },
+                'relax_type': relax_type.value,
+            },
             electronic_type=types.ElectronicType(electronic_type.value),
             spin_type=types.SpinType(spin_type.value),
             initial_magnetization=initial_magnetization,
