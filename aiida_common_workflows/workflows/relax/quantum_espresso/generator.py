@@ -91,9 +91,9 @@ class QuantumEspressoRelaxInputsGenerator(RelaxInputsGenerator):
         if magnetization_per_site:
             # This is a simplified version where no new kinds will be created. The last value specified for any given
             # kind will be taken as the final value to be used for all sites of that kind.
-            initial_magnetization = dict(zip([site.kind_name for site in structure.sites], magnetization_per_site))
+            initial_magnetic_moments = dict(zip([site.kind_name for site in structure.sites], magnetization_per_site))
         else:
-            initial_magnetization = None
+            initial_magnetic_moments = None
 
         builder = self.process_class._process_class.get_builder_from_protocol(  # pylint: disable=protected-access
             calc_engines['relax']['code'],
@@ -111,7 +111,7 @@ class QuantumEspressoRelaxInputsGenerator(RelaxInputsGenerator):
             },
             electronic_type=types.ElectronicType(electronic_type.value),
             spin_type=types.SpinType(spin_type.value),
-            initial_magnetization=initial_magnetization,
+            initial_magnetic_moments=initial_magnetic_moments,
         )
 
         if threshold_forces is not None:
